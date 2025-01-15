@@ -220,7 +220,7 @@ public final class Server {
         Ln.disableSystemStreams();
         Ln.initLogLevel(options.getLogLevel());
 
-        Ln.i("Device: [" + Build.MANUFACTURER + "] " + Build.BRAND + " " + Build.MODEL + " (Android " + Build.VERSION.RELEASE + ")");
+        Ln.i("wdwDevice: [" + Build.MANUFACTURER + "] " + Build.BRAND + " " + Build.MODEL + " (Android " + Build.VERSION.RELEASE + ")");
 
         if (options.getList()) {
             if (options.getCleanup()) {

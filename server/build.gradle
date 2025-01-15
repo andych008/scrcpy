@@ -21,8 +21,42 @@ android {
         buildConfig true
         aidl true
     }
-}
+    // 其他配置...
+    //scrcpy --push - target=/data/local/tmp/
+    applicationVariants.configureEach { variant ->
+        def pushServerTask = tasks.create("pushServerToPhone${variant.name.capitalize()}") {
+            group 'mywork'
+            // 假设server的编译已经在variant的assemble任务中完成
+            dependsOn variant.getAssembleProvider()
+            doLast {
+                def serverExecutablePath = "${buildDir}/outputs/apk/${variant.name}/server-${variant.name}.apk"
+                def pushCommand = "adb push ${serverExecutablePath} /data/local/tmp/scrcpy-server"
+                print pushCommand
+                def process = pushCommand.execute()
+                process.waitFor()
+                if (process.exitValue() == 0) {
+                    println ()
+                    println "Scrcpy Server pushed to phone successfully for ${variant.name}."
+                } else {
+                    println "Error occurred while pushing Scrcpy Server to phone for ${variant.name}."
+                }
 
+                def runServerCommand = "adb shell \"chmod +x /data/local/tmp/scrcpy-server\""
+                print runServerCommand
+                process = runServerCommand.execute()
+                process.waitFor()
+
+                if (process.exitValue() == 0) {
+                    println "chmod on the phone successfully."
+                } else {
+                    println "Error occurred while chmod on the phone."
+                    println "Exit value: ${process.exitValue()}"
+                    println "Error output: ${process.errorStream.text}"
+                }
+            }
+        }
+    }
+}
 dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
