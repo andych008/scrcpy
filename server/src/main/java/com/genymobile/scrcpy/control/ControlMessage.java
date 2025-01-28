@@ -57,6 +57,49 @@ public final class ControlMessage {
     private ControlMessage() {
     }
 
+    private static String getTypeStr(int type) {
+        switch (type) {
+            case TYPE_INJECT_KEYCODE:
+                return "TYPE_INJECT_KEYCODE";
+            case TYPE_INJECT_TEXT:
+                return "TYPE_INJECT_TEXT";
+            case TYPE_INJECT_TOUCH_EVENT:
+                return "TYPE_INJECT_TOUCH_EVENT";
+            case TYPE_INJECT_SCROLL_EVENT:
+                return "TYPE_INJECT_SCROLL_EVENT";
+            case TYPE_BACK_OR_SCREEN_ON:
+                return "TYPE_BACK_OR_SCREEN_ON";
+            case TYPE_EXPAND_NOTIFICATION_PANEL:
+                return "TYPE_EXPAND_NOTIFICATION_PANEL";
+            case TYPE_EXPAND_SETTINGS_PANEL:
+                return "TYPE_EXPAND_SETTINGS_PANEL";
+            case TYPE_COLLAPSE_PANELS:
+                return "TYPE_COLLAPSE_PANELS";
+            case TYPE_GET_CLIPBOARD:
+                return "TYPE_GET_CLIPBOARD";
+            case TYPE_SET_CLIPBOARD:
+                return "TYPE_SET_CLIPBOARD";
+            case TYPE_SET_DISPLAY_POWER:
+                return "TYPE_SET_DISPLAY_POWER";
+            case TYPE_ROTATE_DEVICE:
+                return "TYPE_ROTATE_DEVICE";
+            case TYPE_UHID_CREATE:
+                return "TYPE_UHID_CREATE";
+            case TYPE_UHID_INPUT:
+                return "TYPE_UHID_INPUT";
+            case TYPE_UHID_DESTROY:
+                return "TYPE_UHID_DESTROY";
+            case TYPE_OPEN_HARD_KEYBOARD_SETTINGS:
+                return "TYPE_OPEN_HARD_KEYBOARD_SETTINGS";
+            case TYPE_START_APP:
+                return "TYPE_START_APP";
+            case TYPE_RESET_VIDEO:
+                return "TYPE_RESET_VIDEO";
+            default:
+                return "UNKNOWN_TYPE";
+        }
+    }
+
     public static ControlMessage createInjectKeycode(int action, int keycode, int repeat, int metaState) {
         ControlMessage msg = new ControlMessage();
         msg.type = TYPE_INJECT_KEYCODE;
@@ -168,6 +211,10 @@ public final class ControlMessage {
 
     public int getType() {
         return type;
+    }
+
+    public String getTypeStr() {
+        return ControlMessage.getTypeStr(type);
     }
 
     public String getText() {

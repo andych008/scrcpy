@@ -240,6 +240,7 @@ public class Controller implements AsyncProcessor, VirtualDisplayListener {
             return false;
         }
 
+        Ln.d(msg.getTypeStr());
         switch (msg.getType()) {
             case ControlMessage.TYPE_INJECT_KEYCODE:
                 if (supportsInputEvents) {
