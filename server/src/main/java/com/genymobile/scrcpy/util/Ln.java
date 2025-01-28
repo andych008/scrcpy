@@ -52,21 +52,21 @@ public final class Ln {
 
     public static void v(String message) {
         if (isEnabled(Level.VERBOSE)) {
-            Log.v(TAG, message);
+            Log.v(TAG, extendMsg(message));
             CONSOLE_OUT.print(PREFIX + "VERBOSE: " + message + '\n');
         }
     }
 
     public static void d(String message) {
         if (isEnabled(Level.DEBUG)) {
-            Log.d(TAG, message);
+            Log.d(TAG, extendMsg(message));
             CONSOLE_OUT.print(PREFIX + "DEBUG: " + message + '\n');
         }
     }
 
     public static void i(String message) {
         if (isEnabled(Level.INFO)) {
-            Log.i(TAG, message);
+            Log.i(TAG, extendMsg(message));
             CONSOLE_OUT.print(PREFIX + "INFO: " + message + '\n');
         }
     }
@@ -82,7 +82,7 @@ public final class Ln {
     }
 
     public static void w(String message) {
-        w(message, null);
+        w(extendMsg(message), null);
     }
 
     public static void e(String message, Throwable throwable) {
@@ -96,7 +96,30 @@ public final class Ln {
     }
 
     public static void e(String message) {
-        e(message, null);
+        e(extendMsg(message), null);
+    }
+
+    private static String extendMsg(String msg) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        if (stackTrace.length < 5) {
+            // Fallback to a default message if the stack trace is too short
+            return String.format("[Unknown.Unknown] %s", msg);
+        }
+        StackTraceElement element = stackTrace[4]; // 3 is the index for the caller method
+        String className = getSimpleClassName(element.getClassName());
+        String methodName = element.getMethodName();
+        return String.format("[%s.%s] %s", className, methodName, msg);
+    }
+
+    private static String getSimpleClassName(String fullClassName) {
+        if (fullClassName == null || fullClassName.isEmpty()) {
+            return "Unknown";
+        }
+        String[] parts = fullClassName.split("\\.");
+        if (parts.length == 0) {
+            return "Unknown";
+        }
+        return parts[parts.length - 1];
     }
 
     static class NullOutputStream extends OutputStream {
