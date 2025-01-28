@@ -85,6 +85,8 @@ public final class Server {
             throw new ConfigurationException("New virtual display is not supported");
         }
 
+        Ln.v(options.toString());
+
         CleanUp cleanUp = null;
 
         if (options.getCleanup()) {

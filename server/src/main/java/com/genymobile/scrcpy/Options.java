@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class Options {
 
-    private Ln.Level logLevel = Ln.Level.DEBUG;
+    private Ln.Level logLevel = Ln.Level.VERBOSE;
     private int scid = -1; // 31-bit non-negative value, or -1
     private boolean video = true;
     private boolean audio = true;
@@ -281,6 +281,64 @@ public class Options {
     public boolean getSendCodecMeta() {
         return sendCodecMeta;
     }
+
+    @Override
+    public String toString() {
+        return "Options{" +
+                "logLevel=" + logLevel + ", " +
+                "scid=" + scid + ", " +
+                "video=" + video + ", " +
+                "audio=" + audio + ", " +
+                "maxSize=" + maxSize + ", " +
+                "videoCodec=" + videoCodec + ", " +
+                "audioCodec=" + audioCodec + ", " +
+                "videoSource=" + videoSource + ", " +
+                "audioSource=" + audioSource + ", " +
+                "audioDup=" + audioDup + ", " +
+                "videoBitRate=" + videoBitRate + ", " +
+                "audioBitRate=" + audioBitRate + ", " +
+                "maxFps=" + String.format("%.2f", maxFps) + ", " +
+                "angle=" + String.format("%.2f", angle) + ", " +
+                "tunnelForward=" + tunnelForward + ", " +
+                "crop=" + crop + ", " +
+                "control=" + control + ", " +
+                "displayId=" + displayId + ", " +
+                "cameraId='" + cameraId + "', " +
+                "cameraSize=" + cameraSize + ", " +
+                "cameraFacing=" + cameraFacing + ", " +
+                "cameraAspectRatio=" + cameraAspectRatio + ", " +
+                "cameraFps=" + cameraFps + ", " +
+                "cameraHighSpeed=" + cameraHighSpeed + ", " +
+                "showTouches=" + showTouches + ", " +
+                "stayAwake=" + stayAwake + ", " +
+                "screenOffTimeout=" + screenOffTimeout + ", " +
+                "videoCodecOptions=" + videoCodecOptions + ", " +
+                "audioCodecOptions=" + audioCodecOptions + ", " +
+                "videoEncoder='" + videoEncoder + "', " +
+                "audioEncoder='" + audioEncoder + "', " +
+                "powerOffScreenOnClose=" + powerOffScreenOnClose + ", " +
+                "clipboardAutosync=" + clipboardAutosync + ", " +
+                "downsizeOnError=" + downsizeOnError + ", " +
+                "cleanup=" + cleanup + ", " +
+                "powerOn=" + powerOn + ", " +
+                "newDisplay=" + newDisplay + ", " +
+                "vdDestroyContent=" + vdDestroyContent + ", " +
+                "vdSystemDecorations=" + vdSystemDecorations + ", " +
+                "captureOrientationLock=" + captureOrientationLock + ", " +
+                "captureOrientation=" + captureOrientation + ", " +
+                "listEncoders=" + listEncoders + ", " +
+                "listDisplays=" + listDisplays + ", " +
+                "listCameras=" + listCameras + ", " +
+                "listCameraSizes=" + listCameraSizes + ", " +
+                "listApps=" + listApps + ", " +
+                "sendDeviceMeta=" + sendDeviceMeta + ", " +
+                "sendFrameMeta=" + sendFrameMeta + ", " +
+                "sendDummyByte=" + sendDummyByte + ", " +
+                "sendCodecMeta=" + sendCodecMeta +
+                "}";
+    }
+
+
 
     @SuppressWarnings("MethodLength")
     public static Options parse(String... args) {
