@@ -41,6 +41,19 @@ public final class DeviceMessage {
         return type;
     }
 
+    public String getTypeStr() {
+        switch (type) {
+            case TYPE_CLIPBOARD:
+                return "TYPE_CLIPBOARD";
+            case TYPE_ACK_CLIPBOARD:
+                return "TYPE_ACK_CLIPBOARD";
+            case TYPE_UHID_OUTPUT:
+                return "TYPE_UHID_OUTPUT";
+            default:
+                return "UNKNOWN";
+        }
+    }
+
     public String getText() {
         return text;
     }
@@ -55,5 +68,16 @@ public final class DeviceMessage {
 
     public byte[] getData() {
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return "DeviceMessage{" +
+                "type=" + getTypeStr() + ", " +
+                "text='" + text + '\'' + ", " +
+                "sequence=" + sequence + ", " +
+                "id=" + id + ", " +
+                "data=" + data +
+                '}';
     }
 }
