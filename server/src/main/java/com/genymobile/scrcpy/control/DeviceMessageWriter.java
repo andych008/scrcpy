@@ -1,5 +1,6 @@
 package com.genymobile.scrcpy.control;
 
+import com.genymobile.scrcpy.util.Ln;
 import com.genymobile.scrcpy.util.StringUtils;
 
 import java.io.BufferedOutputStream;
@@ -21,6 +22,7 @@ public class DeviceMessageWriter {
 
     public void write(DeviceMessage msg) throws IOException {
         int type = msg.getType();
+        Ln.d(msg.toString());
         dos.writeByte(type);
         switch (type) {
             case DeviceMessage.TYPE_CLIPBOARD:

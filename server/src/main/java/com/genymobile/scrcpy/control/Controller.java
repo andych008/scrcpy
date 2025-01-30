@@ -240,7 +240,7 @@ public class Controller implements AsyncProcessor, VirtualDisplayListener {
             return false;
         }
 
-        Ln.d(msg.getTypeStr());
+        Ln.v(msg.getTypeStr());
         switch (msg.getType()) {
             case ControlMessage.TYPE_INJECT_KEYCODE:
                 if (supportsInputEvents) {
@@ -548,6 +548,7 @@ public class Controller implements AsyncProcessor, VirtualDisplayListener {
     }
 
     private void getClipboard(int copyKey) {
+        Ln.i("Device clipboard get " + copyKey);
         // On Android >= 7, press the COPY or CUT key if requested
         if (copyKey != ControlMessage.COPY_KEY_NONE && Build.VERSION.SDK_INT >= AndroidVersions.API_24_ANDROID_7_0 && supportsInputEvents) {
             int key = copyKey == ControlMessage.COPY_KEY_COPY ? KeyEvent.KEYCODE_COPY : KeyEvent.KEYCODE_CUT;
